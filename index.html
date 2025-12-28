@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Days Counter</title>
   <style>
-    /* Full-screen body with background image */
     body {
       margin: 0;
       height: 100vh;
@@ -13,25 +12,16 @@
       align-items: center;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      background-image: url('background.png'); /* your image file */
-      background-size: 100% auto;  /* scale width, height adjusts */
-      background-position: center center;
+      background-image: url('background.png'); /* your image */
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
-      color: #fff;
+      color: #fff; /* text color for contrast */
       flex-direction: column;
       position: relative;
     }
 
-    /* Dark overlay for readability */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
-
-    /* Container for content above overlay */
+    /* Content container */
     .content {
       position: relative;
       z-index: 1;
@@ -72,10 +62,25 @@
 
     const daysElement = document.getElementById("days");
 
-    // Animate number from 0 → daysPassed
+    // Optional: animate number from 0 to target
     let current = 0;
     const target = daysPassed;
-    const increment = Math.ceil(target / 100); //
+    const increment = Math.ceil(target / 100);
+    const interval = setInterval(() => {
+      if(current >= target) {
+        clearInterval(interval);
+      } else {
+        current += increment;
+        if(current > target) current = target;
+        daysElement.textContent = current;
+      }
+    }, 10);
 
-
+    // Pop animation
+    setTimeout(() => {
+      daysElement.classList.add("pop");
+    }, 100);
+  </script>
+</body>
+</html>
 
