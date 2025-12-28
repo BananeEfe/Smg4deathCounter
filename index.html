@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Days Counter</title>
+</head>
+<body>
+  <h1 id="counter">Loading...</h1>
+
+  <script>
+    const startDate = new Date("2025-12-27");
+    const today = new Date();
+    const days = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+    document.getElementById("counter").textContent =
+      days + " days without SMG4:";
+  </script>
+</body>
+</html>
