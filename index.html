@@ -5,37 +5,90 @@
   <title>Days Counter</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      margin: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
+      background-image: url('background.png'); /* your image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff; /* text color for contrast */
+      flex-direction: column;
+      position: relative;
     }
+
+    /* Dark overlay for readability */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    /* Content container */
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top text */
     #top-text {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: normal;
-      color: #333;
+      margin-bottom: 1rem;
     }
+
+    /* Days number */
     #days {
-      margin-top: 1rem;
-      font-size: 3rem;
+      font-size: 5rem;
       font-weight: bold;
       color: #2a9d8f;
+      transition: transform 0.5s;
+    }
+
+    /* Pop animation */
+    #days.pop {
+      transform: scale(1.2);
     }
   </style>
 </head>
 <body>
-  <div id="top-text">Days without SMG4:</div>
-  <div id="days">0</div>
+  <div class="content">
+    <div id="top-text">Days without SMG4:</div>
+    <div id="days">0</div>
+  </div>
 
   <script>
     const startDate = new Date("2025-12-27T00:00:00");
     const today = new Date();
     const msPerDay = 1000 * 60 * 60 * 24;
     const daysPassed = Math.floor((today - startDate) / msPerDay);
-    document.getElementById("days").textContent = `${daysPassed}`;
+
+    const daysElement = document.getElementById("days");
+
+    // Optional: animate number from 0 to target
+    let current = 0;
+    const target = daysPassed;
+    const increment = Math.ceil(target / 100);
+    const interval = setInterval(() => {
+      if(current >= target) {
+        clearInterval(interval);
+      } else {
+        current += increment;
+        if(current > target) current = target;
+        daysElement.textContent = current;
+      }
+    }, 10);
+
+    // Pop animation
+    setTimeout(() => {
+      daysElement.classList.add("pop");
+    }, 100);
   </script>
 </body>
 </html>
