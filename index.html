@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Days Counter</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    #top-text {
+      font-size: 1.5rem;
+      font-weight: normal;
+      color: #333;
+    }
+    #days {
+      margin-top: 1rem;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2a9d8f;
+    }
+  </style>
 </head>
 <body>
-  <h1 id="counter">Loading...</h1>
+  <div id="top-text">Days without SMG4:</div>
+  <div id="days">0</div>
 
   <script>
-    const startDate = new Date("2025-12-27");
+    const startDate = new Date("2025-12-27T00:00:00");
     const today = new Date();
-    const days = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-    document.getElementById("counter").textContent =
-      days + " days without SMG4:";
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysPassed = Math.floor((today - startDate) / msPerDay);
+    document.getElementById("days").textContent = `${daysPassed}`;
   </script>
 </body>
 </html>
